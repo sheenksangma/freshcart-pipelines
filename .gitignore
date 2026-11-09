@@ -1,5 +1,23 @@
+cat > .gitignore << 'EOF'
+# Environment variables and secrets
 .env
-*.pkl
-*.csv
-mage.log
+.env.*
+
+# Python cache files
 __pycache__/
+*.pyc
+
+# Generated datasets and model files
+*.csv
+*.pkl
+
+# Mage logs
+mage.log
+
+# Virtual environments
+.venv/
+venv/
+
+# macOS files
+.DS_Store
+EOF
