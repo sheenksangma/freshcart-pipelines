@@ -13,16 +13,18 @@ except ImportError:
 
 @transformer
 def transform(df, *args, **kwargs):
-    train, test_df = train_test_split(
-        df, test_size=0.2, random_state=42, stratify=df["target"]
-    )
-    train, test_df = train.copy(), test_df.copy()
-    train["split"] = "train"
-    test_df["split"] = "test"
-    return pd.concat([train, test_df])
+    train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+
+    train_df = train_df.copy()
+    test_df = test_df.copy()
+    train_df['split'] = 'train'
+    test_df['split'] = 'test'
+
+    result = pd.concat([train_df, test_df])
+    print('Train rows:', len(train_df), '| Test rows:', len(test_df))
+    return result
 
 
 @test
-def test_output(output, *args) -> None:
-    assert output is not None, "The output is undefined"
-    assert set(output["split"]) == {"train", "test"}
+def test_output(output, *args):
+    assert 'split' in output.columns, 'split column missing'

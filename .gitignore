@@ -21,3 +21,6 @@ venv/
 # macOS files
 .DS_Store
 EOF
+# Mage runtime files
+mage_data/
+.logs/
